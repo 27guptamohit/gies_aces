@@ -18,11 +18,67 @@
 <body>
 <!-- Container for the visualization -->
     
-<div id="vis1"></div>
-</div id="vis2"></div>
-<div id="vis3"></div>
+    
+    <h1>Test Visualizations</h1>
+    <!-- Container for the visualization -->
+    <h2Visualizations are divided into two sections:</h2>
+    <h4>1. Report-based visuals: To show the general details from the data.<br>
+        2. Insights: Connecting more than three graphs. Selecting multiple values inside multiple graphs to see the changes in main graph.<br><br>
+        
+    Right now, I have started to update the "Report-based" visuals. Gradually, I will configure "Insights-based" visuals with each progressing day.
+    
+    <h2> January 01, 2021</h2>
+    <h3>1. Agriculture Trade Data Trend:</h3>
+    <h4>Provided raw data was processed in python before generating the below test visualization. It shows the agricultural products imported or exported in/from Illinois, along with the total trade deficit.</h4>  
+    <h4>Beautifications for the below visualizations is possible later.</h4>
+    <div id="vis1"></div>
+    
+    <h3>2. Category Ranking Export Wise:</h3>
+    <h4>Provided raw data was processed in python before generating the below test visualization. <br>
+        It shows the export distance covered by categories in the legend.<br>
+        Ranking is done based on variable_1 mentioned in the legend.<br>
+        variable_2 on y axis represents measuring factors like category wise export value, export distance covered etc.
+    </h4>  
+    <h4>Beautifications for the below visualizations is possible later.</h4>
+    
+    </div id="vis2"></div>
+
+    <h3>3. Category Ranking Export Wise:</h3>
+    <h4>Provided raw data was processed in python before generating the below test visualization. <br>
+        It shows the export distance covered by categories in the legend.<br>
+        Ranking is done based on variable_1 mentioned in the legend.<br>
+        variable_2 on y axis represents measuring factors like category wise export value, export distance covered etc.
+    </h4>  
+    <h4>Beautifications for the below visualizations is possible later.</h4>
+    <div id="vis3"></div>
+
+    <!-- Container for the visualization -->
+    <h2> January 02, 2021</h2>
+    <h3>4 to 5(Connected). Import values based on GDP of Importing State:</h3>
+<h4> If you are using mac, press and hold shift key. Now select one or multiple options in the legend "Category" and then "Year" to filter the data.<br>
+    Now in the Origin State's GDP bar graph, just below bigger graph, click and scrub any area in it.<br>
+    The changes in visualization shows:<br>
+    a. Value exported to importing state<br>
+    b. Filtering on the basis of the GDP of importing states.<br>
+    c. Product category<br>
+    d. Product year<br>
+</h4>
 <div id="vis4"></div>
+
+    <h3>6 to 7(Connected). Import values based on GDP of Exporting State:</h3>
+<h4> If you are using mac, press and hold shift key. Now select one or multiple options in the legend "Category" and then "Year" to filter the data.<br>
+    Now in the Origin State's GDP bar graph, just below bigger graph, click and scrub any area in it.<br>
+    The changes in visualization shows:<br>
+    a. Value exported to importing state<br>
+    b. Filtering on the basis of the GDP of importing states.<br>
+    c. Product category<br>
+    d. Product year<br>
+</h4>
 <div id="vis5"></div>
+
+    <h3>8. Showing the data of the selected graph area:</h3>
+<h4> Please scrub and select the desired area inside the graph. Values inside the selected graph will be shown in the below attached details section.
+</h4>
 <div id="vis6"></div>
 
 
@@ -80,34 +136,35 @@
                             }
                         ;
     
-    var vlSpec2 = {
-                                "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-                                "data": {"url": "https://raw.githubusercontent.com/27guptamohit/gies_aces/main/data/main2.csv"},
 
-                                "transform": [
+    
+        var vlSpec2 = {
+                            "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+                            "data": {"url": "https://raw.githubusercontent.com/27guptamohit/gies_aces/main/data/main2.csv"},
+
+                            "transform": [
                                     {"filter": "datum.variable != 'wgt_dist_export' && datum.variable != 'wgt_dist_import'"}
-                                ],
+                            ],
 
-                                "width": 100,
-                                "height": 100,
-                                "mark": {
-                                    "type": "bar",
-                                    "cornerRadiusEnd": 4, "orient": "vertical",
-                                    "tooltip": true
+                            "width": 100,
+                            "height": 100,
+                            "mark": {
+                                "type": "bar",
+                                "cornerRadiusEnd": 4, "orient": "vertical",
+                                "tooltip": true
+                            },
+                            "encoding": {
+
+                                "column": {
+                                    "field": "Export Rank",
+                                    "title": "Category Ranking Exportwise (2012 - 2018)"
                                 },
-                                "encoding": {
-
-                                    "column": {
-                                        "field": "Export Rank",
-                                        "title": "Category Ranking Exportwise (2012 - 2018)"
-                                    },
-                                    "x": {"field": "value", "type": "quantitative"},
-                                    "y": {"field": "variable", "type": "nominal"},
-                                    "color": {"field": "sctg_desc", "type": "nominal"}
-                                }
-
+                                "x": {"field": "value", "type": "quantitative"},
+                                "y": {"field": "variable", "type": "nominal"},
+                                "color": {"field": "sctg_desc", "type": "nominal"}
                             }
-                        ;
+
+                        };
     
     var vlSpec3 = {
                             "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
@@ -231,8 +288,8 @@
                                 {"type": "nominal", "field": "name_state_dest", "title": "Destination State"},
                                 {"type": "quantitative", "field": "value"}
                             ],
-                            "x": {"type": "nominal", "field": "name_state_dest", "title": "Destination State"},
-                            "y": {"type": "quantitative", "field": "value", "title": "Trading Value"}
+                            "x": {"type": "nominal", "field": "name_state_dest", "title": "Importing State"},
+                            "y": {"type": "quantitative", "field": "value", "title": "Importing Value"}
                         },
                         "selection": {
                             "selector001": {
@@ -264,7 +321,7 @@
                             ],
                             "x": {
                                 "type": "nominal", "field": "name_state_dest",
-                                "title": "Destination State",
+                                "title": "Importing State",
                                 "sort": {"field": "value", "order": "descending", "type": "quantitative"}
                             },
                             "y": {
@@ -385,7 +442,7 @@
                                 {"type": "nominal", "field": "name_state_dest", "title": "Destination State"},
                                 {"type": "quantitative", "field": "value"}
                             ],
-                            "x": {"type": "nominal", "field": "name_state_dest", "title": "Destination State"},
+                            "x": {"type": "nominal", "field": "name_state_dest", "title": "Importing State"},
                             "y": {"type": "quantitative", "field": "value", "title": "Trading Value"}
                         },
                         "selection": {
@@ -419,7 +476,7 @@
                             ],
                             "x": {
                                 "type": "nominal", "field": "name_state_orig",
-                                "title": "Origin State",
+                                "title": "Exporting State",
                                 "sort": {"field": "value", "order": "descending", "type": "quantitative"}
                             },
                             "y": {
